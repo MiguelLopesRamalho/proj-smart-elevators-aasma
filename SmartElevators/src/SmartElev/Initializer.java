@@ -32,6 +32,7 @@ public class Initializer {
 			e1.printStackTrace();
 		}
 		if(type.equals("zero")) {
+			System.out.println("SYSTEM STARTED WHITH OPTION 'ZERO'");
 			initializeZero();
 		}
 		

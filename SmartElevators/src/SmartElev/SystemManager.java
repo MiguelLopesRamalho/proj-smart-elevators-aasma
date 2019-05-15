@@ -8,41 +8,43 @@ import java.util.concurrent.TimeUnit;
 
 public class SystemManager {
 	
-	private long t = 600;
+	private static long t = 600;
 	private static ArrayList<Agent> _agents = new ArrayList<Agent>(); 		//List to keep every agent (usefull if we want to add more than default - 4)
+	private static ArrayList<Request> _requests = new ArrayList<Request>();
 	private static String _sysBoard[][] = {
-			  {"A1","A2","A3","A4"},         
-			  {"B1","B2","B3","B4"},         
-			  {"C1","C2","C3","C4"},
-			  {"D1","D2","D3","D4"},
-			  {"E1","E2","E3","E4"},
-			  {"F1","F2","F3","F4"},
-			  {"G1","G2","G3","G4"},
-			  {"H1","H2","H3","H4"},
-			  {"I1","I2","I3","I4"},
-			  {"J1","J2","J3","J4"},
-			  {"K1","K2","K3","K4"},
-			  {"L1","L2","L3","L4"},
-			  {"M1","M2","M3","M4"},
-			  {"N1","N2","N3","N4"},
-			  {"O1","O2","O3","O4"}		  
+			  {"15A","15B","15C","15D"},	
+			  {"14A","14B","14C","14D"},
+			  {"13A","13B","13C","13D"},
+			  {"12A","12B","12C","12D"},
+			  {"11A","11B","11C","11D"},
+			  {"10A","10B","10C","10D"},
+			  {"09A","09B","09C","09D"},
+			  {"08A","08B","08C","08D"},
+			  {"07A","07B","07C","07D"},
+			  {"06A","06B","06C","06D"},
+			  {"05A","05B","05C","05D"},
+			  {"04A","04B","04C","04D"},
+			  {"03A","03B","03C","03D"},
+			  {"02A","02B","02C","02D"},
+			  {"01A","01B","01C","01D"}	     
 	};
 	private static String _oldBoard[][] = {
-			  {"A1","A2","A3","A4"},         
-			  {"B1","B2","B3","B4"},         
-			  {"C1","C2","C3","C4"},
-			  {"D1","D2","D3","D4"},
-			  {"E1","E2","E3","E4"},
-			  {"F1","F2","F3","F4"},
-			  {"G1","G2","G3","G4"},
-			  {"H1","H2","H3","H4"},
-			  {"I1","I2","I3","I4"},
-			  {"J1","J2","J3","J4"},
-			  {"K1","K2","K3","K4"},
-			  {"L1","L2","L3","L4"},
-			  {"M1","M2","M3","M4"},
-			  {"N1","N2","N3","N4"},
-			  {"O1","O2","O3","O4"}
+			  {"15A","15B","15C","15D"},	
+			  {"14A","14B","14C","14D"},
+			  {"13A","13B","13C","13D"},
+			  {"12A","12B","12C","12D"},
+			  {"11A","11B","11C","11D"},
+			  {"10A","10B","10C","10D"},
+			  {"09A","09B","09C","09D"},
+			  {"08A","08B","08C","08D"},
+			  {"07A","07B","07C","07D"},
+			  {"06A","06B","06C","06D"},
+			  {"05A","05B","05C","05D"},
+			  {"04A","04B","04C","04D"},
+			  {"03A","03B","03C","03D"},
+			  {"02A","02B","02C","02D"},
+			  {"01A","01B","01C","01D"}	
+			  
 	};
 	
 	
@@ -54,6 +56,14 @@ public class SystemManager {
 		}
 		
 	}
+	public ArrayList<Request> getRequests() {
+		return _requests;
+	
+	}
+	
+	public void addRequest(Request req) {
+		_requests.add(req);
+	}
 	
 	public static ArrayList<Agent> getAgents() {
 		return _agents;
@@ -63,18 +73,114 @@ public class SystemManager {
 		return _sysBoard;
 	}
 	
+	public void assignRequest() {
+		while (_requests.size()>0) {
+			Request nextReq = _requests.get(0);
+			for(Agent a : _agents) {
+				if(!a.isBusy()) {
+					a.setRequest(nextReq);
+					System.out.println("Agent: " + a.getID() + " Request: " + _requests.get(0).getOriginFloor());
+					_requests.remove(nextReq);
+					a.setIsBusy(true);
+					break;
+				}
+				else {
+					updateBoard();
+					
+				}
+			}
+		}
+	}
+	 
+	
+	public void updateBoard() {
+			
+		for(Agent a: _agents) {
+			if (a.isBusy()) {
+				System.out.println("Agent ID : " + a.getID());
+				if (!a.hasCargo()) {
+					moveToFloor(a, a.getOriginPos());
+				}
+				else if (a.hasCargo()) {
+					moveToFloor(a, a.getDestFloor());
+				}
+			}
+		}	
+	}
+	
+	public static void moveToFloor(Agent a, int pos) {
+		int cp = a.getCurrPos();
+		if(pos < cp) {
+			System.out.println("Agent: " + a.getID() + " Moving to floor: " + pos);
+			if (cp > pos) {
+				int np = cp -1;
+				a.setPrevPos(cp);
+				a.setCurrPos(np);
+				draw(a,np,a.getPrevPos());
+				cp--;
+			}
+		}
+		else if(pos>cp) {
+			System.out.println("Agent: " + a.getID() + " Moving to floor: " + pos);
+			if (cp < pos) {
+				int np = cp +1;
+				a.setPrevPos(cp);
+				a.setCurrPos(np);
+				draw(a,np,a.getPrevPos());
+				cp++;
+			}
+		}
+		//chegou ao andar para recolher pessoas
+		else if(pos == cp && a.hasCargo()==false) {
+			System.out.println("Agent: " + a.getID() + " Reached the floor: " + pos);
+			int np = cp;
+			draw(a, np, a.getPrevPos());
+			a.setHasCargo(true);
+		}
+		
+		else if (pos==cp && a.hasCargo()) {
+			System.out.println("Agent: " + a.getID() + " Reached the floor: " + pos);
+			int np = cp;
+			a.setHasCargo(false);
+			draw(a, np, a.getPrevPos());
+			a.setIsBusy(false);
+		}	
+	}
+
+	 
+	
+	public static void updatePrevPos(Agent a) {
+		int prevPos = a.getPrevPos();
+		int id = a.getID()-1;
+		String nameToUpdate = _oldBoard[prevPos][id];
+		_sysBoard[prevPos][id] = nameToUpdate;
+	}
 	
 	
-	public void draw(Agent agent, int pos, int prev) {
-		String s = agent.getSymbol();
-		int id = agent.getID();
+	public static void draw (Agent a, int pos, int prev) {
+		String s = a.getSymbol();
+		int id = a.getID();
 		for(String[] sArr: _sysBoard) {
 			for(int i=0; i<sArr.length;i++) {
-				char c = sArr[i].charAt(1);
-				int cTi = Character.getNumericValue(c);
-				if(cTi == id) {
+				char c = sArr[i].charAt(2);
+				int k = 0;
+				switch(c) {
+					case 'A':
+						k=1;
+						break;
+					case 'B':
+						k=2;
+						break;
+					case 'C':
+						k=3;
+						break;
+					case 'D':
+						k=4;
+						break;
+				}
+				if(k == id) {
 					_sysBoard[pos][i] = s; 			// put the agent on the new floor
-					updatePrevPos(agent);
+					updatePrevPos(a);
 				}
 			}
 		}
@@ -84,14 +190,7 @@ public class SystemManager {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-	}
-	
-	public void updatePrevPos(Agent a) {
-		int prevPos = a.getPrevPos();
-		int id = a.getID()-1;
-		String nameToUpdate = _oldBoard[prevPos][id];
-		_sysBoard[prevPos][id] = nameToUpdate;
+		}			
 	}
 	
 	
