@@ -23,6 +23,7 @@ public class Main {
 		Request req4 = new Request(4,14,false);
 		Request req5 = new Request(9,0,false);
 		Request req6 = new Request(14,0,false);
+		Request req7 = new Request(13,2,false);
 		
 		sys.addRequest(req1);
 		sys.addRequest(req2);
@@ -30,6 +31,7 @@ public class Main {
 		sys.addRequest(req4);
 		sys.addRequest(req5);
 		sys.addRequest(req6);
+		sys.addRequest(req7);
 		
 		while (sys.getRequests().size()>0) {
 			sys.assignRequest();

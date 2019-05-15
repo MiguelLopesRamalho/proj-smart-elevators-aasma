@@ -11,6 +11,8 @@ public class SystemManager {
 	private static long t = 600;
 	private static ArrayList<Agent> _agents = new ArrayList<Agent>(); 		//List to keep every agent (usefull if we want to add more than default - 4)
 	private static ArrayList<Request> _requests = new ArrayList<Request>();
+	private int[] utilities = {0,0,0,0};
+
 	private static String _sysBoard[][] = {
 			  {"15A","15B","15C","15D"},	
 			  {"14A","14B","14C","14D"},
@@ -73,21 +75,51 @@ public class SystemManager {
 		return _sysBoard;
 	}
 	
+	public void updateUtilities(Request req) {
+		int util;
+		int index;
+		for(Agent a: _agents) {
+			index = a.getID()-1;
+			if(!a.isBusy()) { 
+				util = Math.abs(req.getOriginFloor() - a.getCurrPos());
+				this.utilities[index] = util;
+			}
+			else {
+				this.utilities[index] = 20;
+			}
+		}
+		  
+	}
+	
 	public void assignRequest() {
 		while (_requests.size()>0) {
 			Request nextReq = _requests.get(0);
-			for(Agent a : _agents) {
-				if(!a.isBusy()) {
-					a.setRequest(nextReq);
-					System.out.println("Agent: " + a.getID() + " Request: " + _requests.get(0).getOriginFloor());
-					_requests.remove(nextReq);
-					a.setIsBusy(true);
-					break;
+			updateUtilities(nextReq);
+			
+			if(_agents.get(0).isBusy() && _agents.get(1).isBusy() && _agents.get(2).isBusy() && _agents.get(3).isBusy()) {
+				updateBoard();
+			}
+			else {
+			
+				int min = utilities[0];
+				int minIndex = 0;
+				int index = 0;
+				for(int i: utilities) {
+					if(i < min) {
+						min = i;
+						minIndex = index;
+						index++;
+					}
+					else{
+						index++;
+					}
 				}
-				else {
-					updateBoard();
-					
-				}
+						
+				_agents.get(minIndex).setRequest(nextReq);
+				//System.out.println("Agent: " + a.getID() + " Request: " + _requests.get(0).getOriginFloor());
+				_requests.remove(nextReq);
+				_agents.get(minIndex).setIsBusy(true);
+				updateBoard();
 			}
 		}
 	}
