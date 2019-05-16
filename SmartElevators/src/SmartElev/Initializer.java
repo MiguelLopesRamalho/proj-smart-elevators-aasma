@@ -36,7 +36,7 @@ public class Initializer {
 			initializeZero();
 		}
 		
-		if(type.contentEquals("random")) {
+		if(type.contentEquals("divided")) {
 			initializeRandom();
 		}
 
@@ -44,9 +44,9 @@ public class Initializer {
 	
 	
 	private void initializeRandom() {
-		// TODO Auto-generated method stub
 		
 	}
+		
 
 	public void initializeZero() {
 		for(Agent a: _agents) {

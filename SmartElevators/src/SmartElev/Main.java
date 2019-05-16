@@ -29,9 +29,9 @@ public class Main {
 		sys.addRequest(req2);
 		sys.addRequest(req3);
 		sys.addRequest(req4);
-		sys.addRequest(req5);
-		sys.addRequest(req6);
-		sys.addRequest(req7);
+		//sys.addRequest(req5);
+		//sys.addRequest(req6);
+		//sys.addRequest(req7);
 		
 		while (sys.getRequests().size()>0) {
 			sys.assignRequest();

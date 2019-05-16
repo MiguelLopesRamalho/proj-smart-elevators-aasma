@@ -1,4 +1,4 @@
-package SmartElev;
+ package SmartElev;
 
 import java.awt.Color;
 
@@ -9,7 +9,8 @@ public class Agent {
 	private String _prevName="";
 	private boolean _isFree = true;
 	private boolean _busy = false;
-	private Request _req;
+	private Request _currReq;
+	private Request _possibleReq;
 	private boolean _hasCargo = false;
 
 	
@@ -71,15 +72,15 @@ public class Agent {
 	}
 
 	public int getOriginPos() {
-		return (14 -_req.getOriginFloor());
+		return (14 -_currReq.getOriginFloor());
 	}
 	
 	public int getDestFloor() {
-		return (14 -_req.getDestFloor());
+		return (14 -_currReq.getDestFloor());
 	}
 	
 	public void setRequest(Request req) {
-		this._req = req;
+		this._currReq = req;
 	}
 	
 	public void setHasCargo(boolean bol) {
@@ -90,6 +91,48 @@ public class Agent {
 		return this._hasCargo;
 	}
 	
+	public Request getPossibleRequest() {
+		return this._possibleReq;
+	}
+	
+	public void setPossibleRequest(Request req) {
+		this._possibleReq = req;
+	}
+	
+	public void calcUtil() {
+		if(this._busy) {
+			this._possibleReq.updateUtilities(this.getID()-1, 20);
+		}
+		else {
+			int dest = _possibleReq.getOriginFloor();
+			int util = Math.abs(dest - this.getCurrPos());
+			this._possibleReq.updateUtilities(this.getID()-1,util);
+		}
+	}
+	
+	public void decide() {
+		if(!this._possibleReq.isTaken()) {
+			int[] arr =  this._possibleReq.getUtilities();
+			int min = arr[0];
+			int minIndex = 0;
+			int index = 0;
+			for(int i: arr) {
+				if(i < min) {
+					min = i;
+					minIndex = index;
+					index++;
+				}
+				else{
+					index++;
+				}
+			}
+			if (minIndex == this.getID()-1) {
+				this._currReq = this._possibleReq;
+				SystemManager.sendMessage();
+				
+			}
+		}
+	}
 
 
 }

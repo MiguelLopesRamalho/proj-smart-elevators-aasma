@@ -75,6 +75,7 @@ public class SystemManager {
 		return _sysBoard;
 	}
 	
+	/*
 	public void updateUtilities(Request req) {
 		int util;
 		int index;
@@ -89,8 +90,34 @@ public class SystemManager {
 			}
 		}
 		  
+	}*/
+	
+	public void assignRequest() {
+		while (_requests.size()>0) {
+			Request nextReq = _requests.get(0);
+			for (Agent a: _agents) {
+				a.setPossibleRequest(nextReq);
+				a.calcUtil();
+			}
+			for (Agent a:_agents) {
+				if(!a.isBusy()) {
+					a.decide();
+					_requests.remove(0);
+					a.setIsBusy(true);
+					updateBoard();
+				}
+				updateBoard();
+			}
+		}
 	}
 	
+	public static void sendMessage() {
+		for( Agent a: _agents) {
+			a.getPossibleRequest().setIsTaken();
+		}
+	}
+	
+	/*
 	public void assignRequest() {
 		while (_requests.size()>0) {
 			Request nextReq = _requests.get(0);
@@ -122,7 +149,7 @@ public class SystemManager {
 				updateBoard();
 			}
 		}
-	}
+	}*/
 	 
 	
 	public void updateBoard() {
