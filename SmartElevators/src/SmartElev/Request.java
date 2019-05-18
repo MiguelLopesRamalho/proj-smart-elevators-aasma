@@ -1,5 +1,3 @@
-package SmartElev;
-
 public class Request {
 	
 	private int _originFloor;

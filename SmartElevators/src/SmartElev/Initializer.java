@@ -1,5 +1,3 @@
-package SmartElev;
-
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +42,51 @@ public class Initializer {
 	
 	
 	private void initializeRandom() {
+		int start = 0;
+		for(Agent a: _agents) {
+			String s = a.getSymbol();
+			int id = a.getID();
+			for(String[] sArr: _sysBoard) {
+				for(int i=0; i<sArr.length;i++) {
+					char c = sArr[i].charAt(2);
+					int k = 0;
+					switch(c) {
+						case 'A':
+							k=1;
+							start=0;
+							break;
+						case 'B':
+							k=2;
+							start=4;
+							break;
+						case 'C':
+							k=3;
+							start=9;
+							break;
+						case 'D':
+							k=4;
+							start=14;
+							break;
+					}
+					if(k == id) {
+						_sysBoard[start][i] = s; //put the agents on the 1st, 5th, 10th, 14th floor
+						a.setCurrPos(start);
+					}
+				}
+			}
+		}
+
+		for(Agent a: _agents){
+			System.out.println("Agent ID: " + a.getID() + " Start Pos: " + a.getCurrPos());
+		} 
+		System.out.println( Board.drawBoard(_sysBoard));
 		
+		try {
+			TimeUnit.MILLISECONDS.sleep(t );
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 		
 
@@ -71,5 +113,4 @@ public class Initializer {
 			e.printStackTrace();
 		}
 	}
-
 }

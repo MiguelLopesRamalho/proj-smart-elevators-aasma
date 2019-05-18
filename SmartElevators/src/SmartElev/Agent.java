@@ -1,21 +1,13 @@
- package SmartElev;
-
-import java.awt.Color;
-
 public class Agent {
 	private int _id;			   		// every agent has an ID corresponding to it's lane
 	private int _currPos;
 	private int _prev;
 	private String _prevName="";
-	private boolean _isFree = true;
+	//private boolean _isFree = true;
 	private boolean _busy = false;
 	private Request _currReq;
 	private Request _possibleReq;
 	private boolean _hasCargo = false;
-
-	
-	
-	
 	
 	public Agent(int id) {
 		this._id = id;
@@ -51,15 +43,18 @@ public class Agent {
 
 	}
 	
+	/*
 	public boolean isFree() {
 		return this._isFree;
 	}
 	
 	public void setIsFree(boolean bool) {
 		this._isFree = bool;
-	}
+	}*/
 	
 	public boolean isBusy() {
+		if(!this._busy)
+			System.out.println("Agent " + this._id + " is free!!!");
 		return this._busy;
 	}
 	
@@ -106,16 +101,18 @@ public class Agent {
 		else {
 			int dest = _possibleReq.getOriginFloor();
 			int util = Math.abs(dest - this.getCurrPos());
+			System.out.println("Agent: "+ this.getID() + " Util: " + util);
 			this._possibleReq.updateUtilities(this.getID()-1,util);
 		}
 	}
 	
-	public void decide() {
+	public boolean decide() {
 		if(!this._possibleReq.isTaken()) {
 			int[] arr =  this._possibleReq.getUtilities();
 			int min = arr[0];
 			int minIndex = 0;
 			int index = 0;
+			
 			for(int i: arr) {
 				if(i < min) {
 					min = i;
@@ -129,10 +126,11 @@ public class Agent {
 			if (minIndex == this.getID()-1) {
 				this._currReq = this._possibleReq;
 				SystemManager.sendMessage();
-				
+				return true; 
 			}
+
 		}
+		
+		return false;
 	}
-
-
 }

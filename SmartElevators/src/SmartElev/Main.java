@@ -1,5 +1,3 @@
-package SmartElev;
-
 import java.util.ArrayList;
 
 public class Main {
@@ -8,7 +6,8 @@ public class Main {
 
 		SystemManager sys = new SystemManager(4);
 		//sys.run("zero",2);
-		Initializer init = new Initializer("zero");
+		//Initializer init = new Initializer("zero");
+		Initializer init = new Initializer("divided");
 		ArrayList<Agent> l = SystemManager.getAgents();
 		System.out.println("TOTAL NUMBER OF AGENTS --> " + l.size());
 		Agent a1 = l.get(0);
@@ -29,9 +28,9 @@ public class Main {
 		sys.addRequest(req2);
 		sys.addRequest(req3);
 		sys.addRequest(req4);
-		//sys.addRequest(req5);
-		//sys.addRequest(req6);
-		//sys.addRequest(req7);
+		sys.addRequest(req5);
+		sys.addRequest(req6);
+		sys.addRequest(req7);
 		
 		while (sys.getRequests().size()>0) {
 			sys.assignRequest();

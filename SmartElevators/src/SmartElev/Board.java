@@ -1,9 +1,6 @@
-package SmartElev;
-
 public class Board {
 	private static int x =15;
-	static String _board[][] = {
-			  {"15A","15B","15C","15D"},	
+	static String _board[][] = {	
 			  {"14A","14B","14C","14D"},
 			  {"13A","13B","13C","13D"},
 			  {"12A","12B","12C","12D"},
@@ -17,8 +14,8 @@ public class Board {
 			  {"04A","04B","04C","04D"},
 			  {"03A","03B","03C","03D"},
 			  {"02A","02B","02C","02D"},
-			  {"01A","01B","01C","01D"}	
-			  
+			  {"01A","01B","01C","01D"},	
+			  {"00A","00B","00C","00D"}
 	};
 
 	public Board() {
