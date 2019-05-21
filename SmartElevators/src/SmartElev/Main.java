@@ -1,3 +1,5 @@
+package SmartElev;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.sql.Timestamp;
@@ -9,8 +11,8 @@ public class Main {
 
 		SystemManager sys = new SystemManager(4);
 		//sys.run("zero",2);
-		//Initializer init = new Initializer("zero");
-		Initializer init = new Initializer("divided");
+		Initializer init = new Initializer("zero");
+		//Initializer init = new Initializer("divided");
 		ArrayList<Request> list = new ArrayList<Request>();
 		
 		long begin = System.currentTimeMillis();

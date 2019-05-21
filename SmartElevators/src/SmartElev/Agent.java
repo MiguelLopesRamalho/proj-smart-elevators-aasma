@@ -1,3 +1,5 @@
+package SmartElev;
+
 public class Agent {
 	private int _id;			   		// every agent has an ID corresponding to it's lane
 	private int _currPos;

@@ -1,3 +1,5 @@
+package SmartElev;
+
 public class Board {
 	private static int x =15;
 	static String _board[][] = {	
