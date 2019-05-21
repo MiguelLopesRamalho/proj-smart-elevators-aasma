@@ -76,7 +76,7 @@ public class SystemManager {
 	public static String[][] getSysBoard(){
 		return _sysBoard;
 	}
-	
+
 	/*
 	public void updateUtilities(Request req) {
 		int util;

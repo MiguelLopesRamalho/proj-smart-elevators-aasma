@@ -66,7 +66,6 @@ public class Main {
 		
 		System.out.println("Its : " + hour + "o clock");
 		
-        
         //11 AM
         hour++;
         Request req14 = new Request(6,11,false);
@@ -204,8 +203,6 @@ public class Main {
         Request req48 = new Request(11,14,false);
         list.add(req47);
         list.add(req48); 
-
-		 
 		
 		System.out.println("Its : " + hour + "o clock");
 		while (sys.getRequests().size()>0) {
@@ -220,7 +217,18 @@ public class Main {
 
 		long end = System.currentTimeMillis();
 		long totalTime = end - begin;
-		System.out.println("Elapsed: " + totalTime/1000 + " segs");
+        System.out.println("Elapsed: " + totalTime/1000 + " segs");
+        
+        
+        for(Agent a: sys.getAgents()) {
+            int floor = 0;
+            int[] history_list = a.getHistory();
+            for(int j: history_list) {
+                System.out.println("Agent: " + a.getID() + " Floor:  " + floor + " Times: " + j);
+                floor++;
+            }
+        }
+
 		
 	}
 

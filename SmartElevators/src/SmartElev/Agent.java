@@ -2,17 +2,16 @@ public class Agent {
 	private int _id;			   		// every agent has an ID corresponding to it's lane
 	private int _currPos;
 	private int _prev;
-	private String _prevName="";
+	//private String _prevName = "";
 	//private boolean _isFree = true;
 	private boolean _busy = false;
 	private Request _currReq;
 	private Request _possibleReq;
 	private boolean _hasCargo = false;
+	private int[] _history = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 	
 	public Agent(int id) {
 		this._id = id;
-
-
 	}
 
 	public String getSymbol() {
@@ -93,6 +92,15 @@ public class Agent {
 	public void setPossibleRequest(Request req) {
 		this._possibleReq = req;
 	}
+
+	public int[] getHistory() {
+		return _history;
+	}
+
+	public void updateHistory(int dest) {
+		_history[dest]++;
+
+	}
 	
 	public void calcUtil() {
 		if(this._busy) {
@@ -126,11 +134,10 @@ public class Agent {
 			if (minIndex == this.getID()-1) {
 				this._currReq = this._possibleReq;
 				SystemManager.sendMessage();
+				updateHistory(this._currReq.getOriginFloor());
 				return true; 
 			}
-
 		}
-		
 		return false;
 	}
 }
