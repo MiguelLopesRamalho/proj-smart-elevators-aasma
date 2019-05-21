@@ -64,6 +64,10 @@ public class SystemManager {
 	public void addRequest(Request req) {
 		_requests.add(req);
 	}
+
+	public void setRequests(ArrayList<Request> list) {
+		_requests = list;
+	}
 	
 	public static ArrayList<Agent> getAgents() {
 		return _agents;
@@ -198,8 +202,9 @@ public class SystemManager {
 		else if(pos == cp && a.hasCargo()==false) {
 			System.out.println("Agent: " + a.getID() + " Reached the floor: " + (14-pos));
 			int np = cp;
-			draw(a, np, a.getPrevPos());
 			a.setHasCargo(true);
+			draw(a, np, a.getPrevPos());
+			
 		}
 		
 		else if (pos==cp && a.hasCargo()) {

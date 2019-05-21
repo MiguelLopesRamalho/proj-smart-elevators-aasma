@@ -8,8 +8,8 @@ public class Request {
 	private boolean _isTaken;
 	
 	public Request(int origin,int destination, boolean isHeavy) {
-		this._originFloor = origin;
-		this._destFloor = destination;
+		this._originFloor = 14-origin;
+		this._destFloor = 14-destination;
 		this._isHeavy = isHeavy;
 		this._isUpdated = false;
 		this._isTaken = false;

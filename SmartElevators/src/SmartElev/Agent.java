@@ -100,7 +100,7 @@ public class Agent {
 		}
 		else {
 			int dest = _possibleReq.getOriginFloor();
-			int util = Math.abs(dest - this.getCurrPos());
+			int util =Math.abs(14-this.getCurrPos() - dest);
 			System.out.println("Agent: "+ this.getID() + " Util: " + util);
 			this._possibleReq.updateUtilities(this.getID()-1,util);
 		}
