@@ -8,9 +8,9 @@ public class Main {
 
 		SystemManager sys = new SystemManager(4);
 		//sys.run("zero",2);
-		Initializer init = new Initializer("zero");
-		//Initializer init = new Initializer("divided");
-		ArrayList<Request> list = new ArrayList<Request>();
+		//Initializer init = new Initializer("zero");
+		Initializer init = new Initializer("random");
+		//ArrayList<Request> list = new ArrayList<Request>();
 		
 		long begin = System.currentTimeMillis();
 
@@ -18,9 +18,9 @@ public class Main {
 		int hour = 7;
         Request req1 = new Request(14,1,false);
         Request req2 = new Request(14,8,false);
-        list.add(req1);
-		list.add(req2);
-		sys.setRequests(list);
+        sys.addRequest(req1);
+		sys.addRequest(req2);
+		//sys.setRequests(list);
 
 		System.out.println("Its : " + hour + "o clock");
 		 
@@ -29,9 +29,9 @@ public class Main {
         Request req3 = new Request(14,10,false);
 		Request req4 = new Request(14,2,false);
         Request req5 = new Request(8,2,false);
-        list.add(req3);
-        list.add(req4);
-        list.add(req5);
+        sys.addRequest(req3);
+        sys.addRequest(req4);
+        sys.addRequest(req5);
 		 
 		
         //9 AM
@@ -42,12 +42,12 @@ public class Main {
 		Request req9 = new Request(2,14,false);
 		Request req10 = new Request(14,9,false);
         Request req11 = new Request(11,14,false);
-        list.add(req6);
-        list.add(req7);
-        list.add(req8);
-        list.add(req9);
-        list.add(req10);
-        list.add(req11);
+        sys.addRequest(req6);
+        sys.addRequest(req7);
+        sys.addRequest(req8);
+        sys.addRequest(req9);
+        sys.addRequest(req10);
+        sys.addRequest(req11);
     
 		 
 
@@ -58,8 +58,8 @@ public class Main {
         hour++;
 		Request req12 = new Request(5,13,false);
         Request req13 = new Request(6,12,false);
-        list.add(req12);
-        list.add(req13);
+        sys.addRequest(req12);
+        sys.addRequest(req13);
         
 		 
 		
@@ -69,7 +69,7 @@ public class Main {
         //11 AM
         hour++;
         Request req14 = new Request(6,11,false);
-        list.add(req14);
+        sys.addRequest(req14);
 
 		 
 		
@@ -81,9 +81,9 @@ public class Main {
 		Request req15 = new Request(0,11,false);
 		Request req16 = new Request(5,14,false);
         Request req17 = new Request(11,0,false);
-        list.add(req15);
-        list.add(req16);
-        list.add(req17);
+        sys.addRequest(req15);
+        sys.addRequest(req16);
+        sys.addRequest(req17);
 
 		 
 		
@@ -99,13 +99,13 @@ public class Main {
 		Request req22 = new Request(6,14,false);
 		Request req23 = new Request(13,5,false);
         Request req24 = new Request(2,14,false);
-        list.add(req18);
-        list.add(req19);
-        list.add(req20);        
-        list.add(req21);
-        list.add(req22);        
-        list.add(req23);
-        list.add(req24);
+        sys.addRequest(req18);
+        sys.addRequest(req19);
+        sys.addRequest(req20);        
+        sys.addRequest(req21);
+        sys.addRequest(req22);        
+        sys.addRequest(req23);
+        sys.addRequest(req24);
 		 
 		
 		System.out.println("Its : " + hour + "o clock");
@@ -119,12 +119,12 @@ public class Main {
 		Request req28 = new Request(12,14,false);
 		Request req29 = new Request(14,7,false);
         Request req30 = new Request(2,14,false);
-        list.add(req25);
-        list.add(req26);
-        list.add(req27);
-        list.add(req28);
-        list.add(req29);
-        list.add(req30);
+        sys.addRequest(req25);
+        sys.addRequest(req26);
+        sys.addRequest(req27);
+        sys.addRequest(req28);
+        sys.addRequest(req29);
+        sys.addRequest(req30);
 
 		 
 		
@@ -135,9 +135,9 @@ public class Main {
         Request req31 = new Request(14,3,false);
 		Request req32 = new Request(6,1,false);
         Request req33 = new Request(9,12,false);
-        list.add(req31);
-        list.add(req32);
-        list.add(req33);
+        sys.addRequest(req31);
+        sys.addRequest(req32);
+        sys.addRequest(req33);
 
 		 
 		
@@ -147,8 +147,8 @@ public class Main {
         hour++;
 		Request req34 = new Request(9,12,false);
         Request req35 = new Request(7,6,false);
-        list.add(req34);
-        list.add(req35);
+        sys.addRequest(req34);
+        sys.addRequest(req35);
 
 		 
 		
@@ -158,8 +158,8 @@ public class Main {
         hour++;
 		Request req36 = new Request(10,4,false);
         Request req37 = new Request(10,14,false);
-        list.add(req36);
-        list.add(req37);
+        sys.addRequest(req36);
+        sys.addRequest(req37);
 
 		 
 		
@@ -170,9 +170,9 @@ public class Main {
 		Request req38 = new Request(13,14,false);
 		Request req39 = new Request(2,0,false);
         Request req40 = new Request(2,14,false);
-        list.add(req38);
-        list.add(req39);
-        list.add(req40);
+        sys.addRequest(req38);
+        sys.addRequest(req39);
+        sys.addRequest(req40);
 
 		 
 		
@@ -186,12 +186,12 @@ public class Main {
 		Request req44 = new Request(1,14,false);
 		Request req45 = new Request(5,14,false);
         Request req46 = new Request(0,14,false);
-        list.add(req41);
-        list.add(req42);
-        list.add(req43);
-        list.add(req44);
-        list.add(req45);
-        list.add(req46);
+        sys.addRequest(req41);
+        sys.addRequest(req42);
+        sys.addRequest(req43);
+        sys.addRequest(req44);
+        sys.addRequest(req45);
+        sys.addRequest(req46);
     
 		 
 		
@@ -201,8 +201,8 @@ public class Main {
         hour++;
 		Request req47 = new Request(6,14,false);
         Request req48 = new Request(11,14,false);
-        list.add(req47);
-        list.add(req48); 
+        sys.addRequest(req47);
+        sys.addRequest(req48); 
 
 		 
 		
