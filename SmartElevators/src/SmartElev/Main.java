@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 
 public class Main {
+	private static int count =0;
 	
 	public static void main(String[] args) {
 
@@ -26,6 +27,7 @@ public class Main {
 		sys.setRequests(list);
 
 		System.out.println("Its : " + hour + "o clock");
+		
 		 
 		//8 AM
         hour++;
@@ -35,6 +37,10 @@ public class Main {
         list.add(req3);
         list.add(req4);
         list.add(req5);
+        sys.setRequests(list);
+      
+		
+		System.out.println("Its : " + hour + "o clock");
 		 
 		
         //9 AM
@@ -51,6 +57,9 @@ public class Main {
         list.add(req9);
         list.add(req10);
         list.add(req11);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
     
 		 
 
@@ -64,6 +73,9 @@ public class Main {
         list.add(req12);
         list.add(req13);
         
+        sys.setRequests(list);
+		sys.resetPos("zero");
+        
 		 
 		
 		System.out.println("Its : " + hour + "o clock");
@@ -73,6 +85,9 @@ public class Main {
         hour++;
         Request req14 = new Request(6,11,false);
         list.add(req14);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
 
 		 
 		
@@ -87,6 +102,9 @@ public class Main {
         list.add(req15);
         list.add(req16);
         list.add(req17);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
 
 		 
 		
@@ -110,6 +128,8 @@ public class Main {
         list.add(req23);
         list.add(req24);
 		 
+        sys.setRequests(list);
+		sys.resetPos("zero");
 		
 		System.out.println("Its : " + hour + "o clock");
 		
@@ -128,6 +148,9 @@ public class Main {
         list.add(req28);
         list.add(req29);
         list.add(req30);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
 
 		 
 		
@@ -141,6 +164,9 @@ public class Main {
         list.add(req31);
         list.add(req32);
         list.add(req33);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
 
 		 
 		
@@ -152,6 +178,9 @@ public class Main {
         Request req35 = new Request(7,6,false);
         list.add(req34);
         list.add(req35);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
 
 		 
 		
@@ -163,6 +192,9 @@ public class Main {
         Request req37 = new Request(10,14,false);
         list.add(req36);
         list.add(req37);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
 
 		 
 		
@@ -176,6 +208,9 @@ public class Main {
         list.add(req38);
         list.add(req39);
         list.add(req40);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
 
 		 
 		
@@ -195,6 +230,9 @@ public class Main {
         list.add(req44);
         list.add(req45);
         list.add(req46);
+        
+        sys.setRequests(list);
+		sys.resetPos("zero");
     
 		 
 		
@@ -206,6 +244,8 @@ public class Main {
         Request req48 = new Request(11,14,false);
         list.add(req47);
         list.add(req48); 
+        
+        sys.setRequests(list);
 
 		 
 		

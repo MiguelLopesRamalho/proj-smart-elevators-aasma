@@ -161,7 +161,6 @@ public class SystemManager {
 			}
 		}
 	}*/
-	 
 	
 	public void updateBoard() {
 			
